@@ -3,7 +3,6 @@ package com.gintire.springboottest.junit5;
 import com.gintire.springboottest.application.UserService;
 import com.gintire.springboottest.domain.Gender;
 import com.gintire.springboottest.domain.User;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class UserTest {
@@ -32,7 +31,7 @@ public class UserTest {
 
     @Test
     void 모든유저테스트() {
-        Assertions.assertThat(users).isEqualTo(userService.getAllUsers());
+        assertEquals(users, userService.getAllUsers());
     }
     @Test
     void 유저검색테스트() {
