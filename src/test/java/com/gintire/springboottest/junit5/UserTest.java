@@ -3,32 +3,39 @@ package com.gintire.springboottest.junit5;
 import com.gintire.springboottest.application.UserService;
 import com.gintire.springboottest.domain.Gender;
 import com.gintire.springboottest.domain.User;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class UserTest {
     @Autowired
     private UserService userService;
 
-    User[] users = new User[5];
+    public List<User> users = new ArrayList<>();
 
     @BeforeEach
     void 초기화() {
-        users[0] = new User("james", 32, Gender.MALE);
-        users[1] = new User("paul", 49, Gender.INTERSEX);
-        users[2] = new User("ariana", 22, Gender.FEMALE);
-        users[3] = new User("dave", 54, Gender.MALE);
-        users[4] = new User("luka", 23, Gender.MALE);
+        users.add(new User(0, "james", 32, Gender.MALE));
+        users.add(new User(1, "paul", 49, Gender.INTERSEX));
+        users.add(new User(2, "ariana", 22, Gender.FEMALE));
+        users.add(new User(3, "dave", 54, Gender.MALE));
+        users.add(new User(4, "luka", 23, Gender.MALE));
     }
 
     @Test
     void 모든유저테스트() {
-        assertArrayEquals(users, userService.getAllUsers());
+        Assertions.assertThat(users).isEqualTo(userService.getAllUsers());
+    }
+    @Test
+    void 유저검색테스트() {
+        assertEquals(userService.getUser("james"), new User(0, "james", 32, Gender.MALE));
     }
 }
