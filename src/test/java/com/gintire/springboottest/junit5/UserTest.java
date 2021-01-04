@@ -3,16 +3,18 @@ package com.gintire.springboottest.junit5;
 import com.gintire.springboottest.application.UserService;
 import com.gintire.springboottest.domain.Fixture;
 import com.gintire.springboottest.domain.Gender;
+import com.gintire.springboottest.domain.Shape;
 import com.gintire.springboottest.domain.User;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class UserTest {
@@ -57,6 +59,21 @@ public class UserTest {
         Assumptions.assumeTrue(Fixture.apiVersion() < 10);
         // these tests only apply to a recent API version
         assertEquals(1, 1);
+    }
+
+    @ParameterizedTest (name= "{0}")
+    @DisplayName("Should create shapes with different numbers of sides")
+    @ValueSource(ints = {3, 4, 5, 8, 14})
+    void shouldCreateShapesWithDifferentNumbersOfSides(int expectedNumberOfSides) {
+        Shape shape = new Shape(expectedNumberOfSides);
+        assertEquals(expectedNumberOfSides, shape.numberOfSides());
+    }
+    @ParameterizedTest (name= "{0}")
+    @DisplayName("Should create shapes with different numbers of sides")
+    @ValueSource(ints = {Integer.MAX_VALUE, Integer.MIN_VALUE})
+    void shouldCreateShapesWithDifferentNumbersOfSidesException(int expectedNumberOfSides) {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Shape(expectedNumberOfSides));
     }
 
     @Test
