@@ -4,6 +4,7 @@ import com.gintire.springboottest.application.UserService;
 import com.gintire.springboottest.domain.Gender;
 import com.gintire.springboottest.domain.User;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +29,14 @@ public class UserTest {
         users.add(new User(3, "dave", 54, Gender.MALE));
         users.add(new User(4, "luka", 23, Gender.MALE));
     }
+
+    @Test
+    void 간단한Assertion() { assertEquals(1, 1); }
+
+    @Test
+    @Disabled("Not implemented yet")
+    void 테스트_건너뛰기() { assertEquals(1, 1);}
+
 
     @Test
     void 모든유저테스트() {
