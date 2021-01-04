@@ -1,12 +1,10 @@
 package com.gintire.springboottest.junit5;
 
 import com.gintire.springboottest.application.UserService;
+import com.gintire.springboottest.domain.Fixture;
 import com.gintire.springboottest.domain.Gender;
 import com.gintire.springboottest.domain.User;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -51,6 +49,14 @@ public class UserTest {
                 () -> assertEquals(3, numbers.get(1)),
                 () -> assertEquals(5, numbers.get(2)),
                 () -> assertEquals(7, numbers.get(3)));
+    }
+
+    @Test
+    @DisplayName("Should only run the test if some criteria are met")
+    void shouldOnlyRunTheTestIfSomeCriteriaAreMet() {
+        Assumptions.assumeTrue(Fixture.apiVersion() < 10);
+        // these tests only apply to a recent API version
+        assertEquals(1, 1);
     }
 
     @Test
