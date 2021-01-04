@@ -5,6 +5,7 @@ import com.gintire.springboottest.domain.Gender;
 import com.gintire.springboottest.domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -31,17 +33,31 @@ public class UserTest {
     }
 
     @Test
-    void 간단한Assertion() { assertEquals(1, 1); }
+    void 간단한Assertion() {
+        assertEquals(1, 1);
+    }
 
     @Test
     @Disabled("Not implemented yet")
-    void 테스트_건너뛰기() { assertEquals(1, 1);}
+    void 테스트_건너뛰기() {
+        assertEquals(1, 1);
+    }
 
+    @Test
+    @DisplayName("리스트내모든값확인")
+    void 리스트내모든값확인() {
+        List<Integer> numbers = List.of(2, 3, 5, 7);
+        assertAll(() -> assertEquals(2, numbers.get(0)),
+                () -> assertEquals(3, numbers.get(1)),
+                () -> assertEquals(5, numbers.get(2)),
+                () -> assertEquals(7, numbers.get(3)));
+    }
 
     @Test
     void 모든유저테스트() {
         assertEquals(users, userService.getAllUsers());
     }
+
     @Test
     void 유저검색테스트() {
         assertEquals(userService.getUser("james"), new User(0, "james", 32, Gender.MALE));
