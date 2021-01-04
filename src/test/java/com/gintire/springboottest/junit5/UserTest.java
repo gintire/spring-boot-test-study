@@ -61,14 +61,15 @@ public class UserTest {
         assertEquals(1, 1);
     }
 
-    @ParameterizedTest (name= "{0}")
+    @ParameterizedTest(name = "{0}")
     @DisplayName("Should create shapes with different numbers of sides")
     @ValueSource(ints = {3, 4, 5, 8, 14})
     void shouldCreateShapesWithDifferentNumbersOfSides(int expectedNumberOfSides) {
         Shape shape = new Shape(expectedNumberOfSides);
         assertEquals(expectedNumberOfSides, shape.numberOfSides());
     }
-    @ParameterizedTest (name= "{0}")
+
+    @ParameterizedTest(name = "{0}")
     @DisplayName("Should create shapes with different numbers of sides")
     @ValueSource(ints = {Integer.MAX_VALUE, Integer.MIN_VALUE})
     void shouldCreateShapesWithDifferentNumbersOfSidesException(int expectedNumberOfSides) {
@@ -84,5 +85,39 @@ public class UserTest {
     @Test
     void 유저검색테스트() {
         assertEquals(userService.getUser("james"), new User(0, "james", 32, Gender.MALE));
+    }
+}
+
+class ExampleTest {
+    @Nested
+    @DisplayName("When a shape has been created")
+    class WhenShapeExists {
+        private final Shape shape = new Shape(4);
+
+        @Nested
+        @DisplayName("Should allow")
+        class ShouldAllow {
+            @Test
+            @DisplayName("seeing the number of sides")
+            void seeingTheNumberOfSides() {
+                assertEquals(4, shape.numberOfSides());
+            }
+
+            @Test
+            @DisplayName("Seeing the description")
+            void seeingTheDescription() {
+                assertEquals("Square", shape.description());
+            }
+        }
+
+        @Nested
+        @DisplayName("Should not")
+        class ShouldNot {
+            @Test
+            @DisplayName("be equal to another shape with the same number of sides")
+            void beEqualToAnotherShapeWithTheSameNumberOfSides() {
+                assertNotEquals(new Shape(4), shape);
+            }
+        }
     }
 }

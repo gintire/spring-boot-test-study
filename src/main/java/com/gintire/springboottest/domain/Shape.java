@@ -13,4 +13,5 @@ public class Shape {
     public int numberOfSides() {
         return numberOfSides;
     }
+    public String description() {return "Square";}
 }
