@@ -1,13 +1,12 @@
 package com.gintire.springboottest.junit5;
 
+import com.gintire.springboottest.domain.Calculator;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.*;
 import org.junit.jupiter.api.function.ThrowingConsumer;
 import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.springframework.boot.test.autoconfigure.web.client.WebClientRestTemplateAutoConfiguration;
-import org.springframework.boot.web.server.WebServerException;
 
 import java.io.IOException;
 import java.lang.annotation.ElementType;
@@ -17,7 +16,6 @@ import java.lang.annotation.Target;
 import java.lang.reflect.Parameter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.security.SecureRandomParameters;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.IntStream;
@@ -25,7 +23,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
-import static org.junit.jupiter.api.DynamicTest.*;
+import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 /**
  * Project: spring-boot-test
@@ -276,7 +274,7 @@ public class AnotationsTest {
     @Disabled
     @Tag("development")
     void developmentTest() {
-        fail("It is a Development test");
+        //fail("It is a Development test");
     }
 
     /**
@@ -343,12 +341,6 @@ class OrderedTestDemo {
     @Test
     @Order(1)
     void validValues(){}
-}
-
-class Calculator {
-    public int multiply(int a, int b) {
-        return a * b;
-    }
 }
 
 class RandomParametersExtension implements ParameterResolver {
