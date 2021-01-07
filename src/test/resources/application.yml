@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: CI
+---
+spring:
+  profile: CI
