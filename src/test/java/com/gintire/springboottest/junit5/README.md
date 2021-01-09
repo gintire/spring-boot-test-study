@@ -80,3 +80,21 @@ Assertions의 JUnit4와의 가장 큰 차이점은 Java8의 람다를 사용할 
 JUnit Jupiter comes with a subset of the assumption methods that JUnit 4 provides and adds a few that lend themselves well to being used with Java 8 lambda expressions and method references. All JUnit Jupiter assumptions are static methods in the org.junit.jupiter.api.Assumptions class.  
 
 Assumptions 구문은 테스트 메서드가 특정한 조건에 대해서 실행하고자 할 때 사용하는 구문이다.
+
+### Parallel Execution
+> https://junit.org/junit5/docs/current/user-guide/#writing-tests-parallel-execution
+
+기본적으로 Junit Jupiter test는 싱글 스레드에서 순차적으로 실행된다. 병렬 실행으로 실행 속도를 증가시킬수 있다.
+
+`junit.jupiter.execution.parallel.enabled` 를 `true`로 설정 하면 된다. - 예를 들어 `junit-platform.yml`에 설정한다.
+
+병렬 설정 모드에는 다음 두 설정을 할 수 있다.  
+`junit.jupiter.execution.parallel.mode.default`  
+* `SAME_THREAD`  
+Force execution in the same thread used by the parent. For example, when used on a test method, the test method will be executed in the same thread as any @BeforeAll or @AfterAll methods of the containing test class.
+* `CONCURRENT`  
+Execute concurrently unless a resource lock forces execution in the same thread.
+
+`@Execution(CONCURRENT)` 를 각 클래스에 설정하여 개별 클래스로 설정도 가능하다.
+
+[![병렬실행과 싱글 쓰레드 관계!](https://junit.org/junit5/docs/current/user-guide/images/writing-tests_execution_mode.svg)](https://junit.org/junit5/docs/current/user-guide/images/writing-tests_execution_mode.svg)

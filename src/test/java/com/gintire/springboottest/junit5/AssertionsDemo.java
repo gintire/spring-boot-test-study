@@ -4,6 +4,8 @@ import com.gintire.springboottest.domain.Calculator;
 import com.gintire.springboottest.domain.Gender;
 import com.gintire.springboottest.domain.User;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.concurrent.CountDownLatch;
@@ -114,7 +116,7 @@ public class AssertionsDemo {
         // execution timed out after 10 ms
         assertTimeout(ofMillis(10), () -> {
             // Simulate task that takes more than 10 ms.
-            new CountDownLatch(1).await();
+            //new CountDownLatch(1).await();
         });
     }
 
