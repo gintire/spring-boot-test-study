@@ -4,14 +4,12 @@ import com.gintire.springboottest.domain.Calculator;
 import com.gintire.springboottest.domain.Gender;
 import com.gintire.springboottest.domain.User;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledOnOs;
-import org.junit.jupiter.api.condition.OS;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.concurrent.CountDownLatch;
 
-import static java.time.Duration.ofMinutes;
 import static java.time.Duration.ofMillis;
+import static java.time.Duration.ofMinutes;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
