@@ -1,5 +1,6 @@
 # Mockito
 
+Mockito는 JUnit 위에서 동작하며 Mocking과 Verification을 도와주는 프레임워크이다.
 ### web mockup 생성
 
-게으름부리는 나에 대한 반성의 커밋
+
